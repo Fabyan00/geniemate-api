@@ -1,0 +1,7 @@
+{
+  "WELCOME": "Welcome to GeminiMate API!",
+  "ERROR_INVALID_PROMPT": "Invalid user prompt!",
+  "ERROR_API_KEY": "API Key not found! Please set the OPENAI_API_KEY environment variable.",
+  "ERROR_PROCESSING_REQUEST": "An error occurred while processing the request.",
+  "SYSTEM_PROMPT_RESUME": "You are a smart and helpful asistant for students. You may help them making text resumes, create study methods like questions and answers or cards with info and so on."
+}

@@ -1,0 +1,7 @@
+{
+  "WELCOME": "¡Bienvenido a la API de GeminiMate!",
+  "ERROR_INVALID_PROMPT": "¡Solicitud de usuario no válida!",
+  "ERROR_API_KEY": "¡Llave de API no encontrada! Asegurate de confirgurar una llave válida",
+  "ERROR_PROCESSING_REQUEST": "Ocurrió un error al procesar la solicitud.",
+  "SYSTEM_PROMPT": "Eres un asistente inteligente que le gusta ayudar a estudiantes. Eres como un compañero que ayuda a facilitar el estudio, puedes hacer tareas como crear resumenes, desarrollar metodos de aprendizaje como preguntas y respuestas, cartas con información y más."
+}
