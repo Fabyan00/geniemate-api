@@ -9,38 +9,30 @@ from app.locales.localization import Localization, tr
 
 router = APIRouter()
 
-@router.post('/resume')
+
+@router.post("/resume")
 async def get_resume(input: Promt):
-  try:
-    Localization.set_language('en')
-    validate_input(input.prompt)
-      
-    completion = client.chat.completions.create(
-      model = "gpt-4o-mini",
-      messages=[
-        {
-          "role": "system", 
-          "content": tr("SYSTEM_PROMPT_RESUME")
-        },
-        {
-          "role": "user", 
-          "content": input.prompt
-        },
-      ]
-    )
-    return {
-      "message": "Success", 
-      "response": completion.choices[0].message.content
-    }
-  except ValueError as ve:
-    logging.error(f"Invalid data error: {str(ve)}")
-    raise HTTPException(status_code=422, detail=(f"Invalid data error: {str(ve)}"))
-  except OpenAIError as oe:
-    logging.error(f"OpenAI API Error: {str(oe)}")
-    raise HTTPException(status_code=502, detail=(f"OpenAI API Error: {str(oe)}"))
-  except HTTPException as he:
-    logging.error(f"HTTP Error: {he.detail}")
-    raise he
-  except Exception as e:
-    logging.exception(tr('ERROR_PROCESSING_REQUEST'))
-    raise HTTPException(status_code=500, detail=str(e))
+    try:
+        Localization.set_language("en")
+        validate_input(input.prompt)
+
+        completion = client.chat.completions.create(
+            model="gpt-4o-mini",
+            messages=[
+                {"role": "system", "content": tr("SYSTEM_PROMPT_RESUME")},
+                {"role": "user", "content": input.prompt},
+            ],
+        )
+        return {"message": "Success", "response": completion.choices[0].message.content}
+    except ValueError as ve:
+        logging.getLogger().error("Invalid data error: %s", ve)
+        raise HTTPException(status_code=422, detail=f"Invalid data error: {ve}")
+    except OpenAIError as oe:
+        logging.getLogger().error("OpenAI API Error: %s", oe)
+        raise HTTPException(status_code=502, detail=f"OpenAI API Error: {oe}")
+    except HTTPException as he:
+        logging.getLogger().error("HTTP Error: %s", he)
+        raise he
+    except Exception as e:
+        logging.exception(tr("ERROR_PROCESSING_REQUEST"))
+        raise HTTPException(status_code=500, detail=e)
