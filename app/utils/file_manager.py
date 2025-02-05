@@ -2,7 +2,7 @@
 
 from pathlib import Path
 
-ENC = "utf-8"
+# ENC = "utf-8"
 
 
 def check_file_exist(file_path: str) -> bool:
@@ -14,9 +14,8 @@ def check_file_exist(file_path: str) -> bool:
         return False
 
 
-def read_file(file_path, encoding=ENC):
+def read_file():
     """Reads a specific file"""
-    pass
     # if check_file_exist(file_path=file_path):
     #     try:
     #         with open(file_path, "r", encoding=encoding) as f:
@@ -28,9 +27,8 @@ def read_file(file_path, encoding=ENC):
     #     print("File not found!")
 
 
-def write_file(file_path):
+def write_file():
     """Creates or updates a file"""
-    pass
     # if check_file_exist(file_path=file_path):
     #     try:
     #         f = open(file_path, "a", encoding=ENC)
