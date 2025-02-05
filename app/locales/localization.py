@@ -1,8 +1,12 @@
+"""This module contains configuration language class"""
+
 import json
 import os
 
 
 class Localization:
+    """Class that handles language"""
+
     _cache = {}
     _default_lang = "en"
 

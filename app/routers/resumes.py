@@ -1,3 +1,5 @@
+"""Module for user api endpoints"""
+
 import logging
 from fastapi import APIRouter
 from fastapi import HTTPException
@@ -12,6 +14,7 @@ router = APIRouter()
 
 @router.post("/resume")
 async def get_resume(input: Promt):
+    """Creates a resume based on user input"""
     try:
         Localization.set_language("en")
         validate_input(input.prompt)

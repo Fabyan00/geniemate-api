@@ -1,3 +1,5 @@
+"""Setting api config"""
+
 import logging
 import os
 from dotenv import load_dotenv

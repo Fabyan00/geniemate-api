@@ -1,11 +1,12 @@
-from pathlib import Path
+"""Module for file management"""
 
-# File management
+from pathlib import Path
 
 ENC = "utf-8"
 
 
 def check_file_exist(file_path: str) -> bool:
+    """Returns if file exists in a path"""
     try:
         my_file = Path(file_path)
         return my_file.is_file()
@@ -14,6 +15,7 @@ def check_file_exist(file_path: str) -> bool:
 
 
 def read_file(file_path, encoding=ENC):
+    """Reads a specific file"""
     if check_file_exist(file_path=file_path):
         try:
             f = open(file_path, "r", encoding=encoding)
@@ -26,6 +28,7 @@ def read_file(file_path, encoding=ENC):
 
 
 def write_file(file_path):
+    """Creates or updates a file"""
     if check_file_exist(file_path=file_path):
         try:
             f = open(file_path, "a", encoding=ENC)

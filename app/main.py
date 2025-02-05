@@ -1,3 +1,5 @@
+"""Main app"""
+
 from fastapi import FastAPI
 from app.routers import resumes
 from .locales.localization import Localization, tr
@@ -12,4 +14,5 @@ app.include_router(resumes.router, prefix="/api")
 
 @app.get("/")
 async def root():
+    """Returns welcome message"""
     return {"message": tr("WELCOME")}
