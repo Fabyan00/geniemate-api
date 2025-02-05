@@ -13,17 +13,17 @@ router = APIRouter()
 
 
 @router.post("/resume")
-async def get_resume(input: Promt):
+async def get_resume(user_input: Promt):
     """Creates a resume based on user input"""
     try:
         Localization.set_language("en")
-        validate_input(input.prompt)
+        validate_input(user_input.prompt)
 
         completion = client.chat.completions.create(
             model="gpt-4o-mini",
             messages=[
                 {"role": "system", "content": tr("SYSTEM_PROMPT_RESUME")},
-                {"role": "user", "content": input.prompt},
+                {"role": "user", "content": user_input.prompt},
             ],
         )
         return {"message": "Success", "response": completion.choices[0].message.content}

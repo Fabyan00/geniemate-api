@@ -3,7 +3,7 @@
 from fastapi import FastAPI
 from app.routers import resumes
 from .locales.localization import Localization, tr
-from .config import client  # noqa: F401
+from .config import client  # pylint: disable=unused-import
 
 Localization.set_language("es")
 
