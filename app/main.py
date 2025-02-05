@@ -7,7 +7,7 @@ Localization.set_language('es')
 
 app = FastAPI()
 
-app.include_router(resumes.router)
+app.include_router(resumes.router, prefix="/api")
 
 @app.get("/")
 async def root():
