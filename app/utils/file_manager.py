@@ -16,28 +16,30 @@ def check_file_exist(file_path: str) -> bool:
 
 def read_file(file_path, encoding=ENC):
     """Reads a specific file"""
-    if check_file_exist(file_path=file_path):
-        try:
-            f = open(file_path, "r", encoding=encoding)
-            print(f.read())
-            f.close()
-        except OSError as e:
-            print(f"ERROR: {e}")
-    else:
-        print("File not found!")
+    pass
+    # if check_file_exist(file_path=file_path):
+    #     try:
+    #         with open(file_path, "r", encoding=encoding) as f:
+    #         print(f.read())
+    #         f.close()
+    #     except OSError as e:
+    #         print(f"ERROR: {e}")
+    # else:
+    #     print("File not found!")
 
 
 def write_file(file_path):
     """Creates or updates a file"""
-    if check_file_exist(file_path=file_path):
-        try:
-            f = open(file_path, "a", encoding=ENC)
-            f.write("Now the file has more content!")
-            f.close()
-        except OSError as e:
-            print(f"ERROR: {e}")
-    else:
-        try:
-            f = open("myfile.txt", "w", encoding=ENC)
-        except OSError as oe:
-            print(f"ERROR: {oe}")
+    pass
+    # if check_file_exist(file_path=file_path):
+    #     try:
+    #         f = open(file_path, "a", encoding=ENC)
+    #         f.write("Now the file has more content!")
+    #         f.close()
+    #     except OSError as e:
+    #         print(f"ERROR: {e}")
+    # else:
+    #     try:
+    #         f = open("myfile.txt", "w", encoding=ENC)
+    #     except OSError as oe:
+    #         print(f"ERROR: {oe}")
