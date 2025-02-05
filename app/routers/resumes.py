@@ -4,7 +4,7 @@ from fastapi import HTTPException
 from openai import OpenAIError
 from app.config import client
 from app.models.promt_model import Promt
-from app.dependencies import validate_input
+from app.utils.promp_validations import validate_input
 from app.locales.localization import Localization, tr
 
 router = APIRouter()
@@ -13,7 +13,7 @@ router = APIRouter()
 async def get_resume(input: Promt):
   try:
     Localization.set_language('en')
-    validate_input(input.text)
+    validate_input(input.prompt)
       
     completion = client.chat.completions.create(
       model = "gpt-4o-mini",
@@ -24,7 +24,7 @@ async def get_resume(input: Promt):
         },
         {
           "role": "user", 
-          "content": input.text
+          "content": input.prompt
         },
       ]
     )

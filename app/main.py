@@ -12,3 +12,4 @@ app.include_router(resumes.router, prefix="/api")
 @app.get("/")
 async def root():
   return {"message": tr('WELCOME')}
+
