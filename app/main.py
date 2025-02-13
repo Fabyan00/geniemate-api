@@ -1,10 +1,12 @@
+"""Main app"""
+
 from fastapi import FastAPI
 from app.routers import resumes
 from .locales.localization import Localization, tr
-from .config import client
 from starlette.middleware.cors import CORSMiddleware
+from .config import client  # pylint: disable=unused-import
 
-Localization.set_language('es')
+Localization.set_language("es")
 
 app = FastAPI()
 
@@ -22,6 +24,8 @@ app.add_middleware(
 
 app.include_router(resumes.router, prefix="/api")
 
+
 @app.get("/")
 async def root():
-  return {"message": tr('WELCOME')}
+    """Returns welcome message"""
+    return {"message": tr("WELCOME")}
