@@ -1,9 +1,9 @@
 """Main app"""
 
 from fastapi import FastAPI
+from starlette.middleware.cors import CORSMiddleware
 from app.routers import resumes
 from .locales.localization import Localization, tr
-from starlette.middleware.cors import CORSMiddleware
 from .config import client  # pylint: disable=unused-import
 
 Localization.set_language("es")
