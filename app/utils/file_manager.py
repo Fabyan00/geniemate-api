@@ -1,43 +1,35 @@
-# """Module for file management"""
+"""Module for file management"""
 
-# from pathlib import Path
-
-# ENC = "utf-8"
-
-# # PDF, TXT, DOCX
-
-
-# def check_file_exist(file_path: str) -> bool:
-#     """Returns if file exists in a path"""
-#     try:
-#         my_file = Path(file_path)
-#         return my_file.is_file()
-#     except OSError:
-#         return False
+from fastapi import HTTPException
+from io import BytesIO
+import logging
+from PyPDF2 import PdfReader  # For reading PDF files
+from docx import Document  # For reading DOCX files
 
 
-# def read_file():
-#     """Reads a specific file"""
-#     if check_file_exist(file_path=file_path):
-#         try:
-#             with open(file_path, "r", encoding=encoding) as f:
-#                 f.close()
-#         except OSError as e:
-#             print(f"ERROR: {e}")
-#     else:
-#         print("File not found!")
+class FileManagerHelper:
+    """Helper function to read the content of PDF files"""
 
-# def write_file():
-#     """Creates or updates a file"""
-#     if check_file_exist(file_path=file_path):
-#         try:
-#             f = open(file_path, "a", encoding=ENC)
-#             f.write("Now the file has more content!")
-#             f.close()
-#         except OSError as e:
-#             print(f"ERROR: {e}")
-#     else:
-#         try:
-#             f = open("myfile.txt", "w", encoding=ENC)
-#         except OSError as oe:
-#             print(f"ERROR: {oe}")
+    def read_pdf(file: BytesIO):
+        try:
+            reader = PdfReader(file)
+            text = ""
+            for page in reader.pages:
+                text += page.extract_text() or ""
+            return text
+        except Exception as e:
+            logging.error(f"Error reading PDF file: {e}")
+            raise HTTPException(status_code=400, detail="Unable to process PDF file")
+
+    """ Helper function to read the content of DOCX files """
+
+    def read_docx(file: BytesIO):
+        try:
+            doc = Document(file)
+            text = ""
+            for para in doc.paragraphs:
+                text += para.text + "\n"
+            return text
+        except Exception as e:
+            logging.error(f"Error reading DOCX file: {e}")
+            raise HTTPException(status_code=400, detail="Unable to process DOCX file")
