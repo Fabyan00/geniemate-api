@@ -1,4 +1,4 @@
-"""Module for file management"""
+"""Module helper for file management"""
 
 from fastapi import HTTPException
 from io import BytesIO
@@ -8,9 +8,23 @@ from docx import Document  # For reading DOCX files
 
 
 class FileManagerHelper:
-    """Helper function to read the content of PDF files"""
+    def manage_file(file_extension: str, content: BytesIO):
+        """Handling file type"""
+
+        if file_extension == "pdf":
+            return FileManagerHelper.read_pdf(content)
+        elif file_extension == "txt":
+            return content.decode("utf-8")
+        elif file_extension == "docx":
+            return FileManagerHelper.read_docx(content)
+        else:
+            raise HTTPException(
+                status_code=400,
+                detail="File type unssuported, only PDF, TXT, and DOCX are allowed.",
+            )
 
     def read_pdf(file: BytesIO):
+        """Hndling content of PDF files"""
         try:
             reader = PdfReader(file)
             text = ""
@@ -21,9 +35,8 @@ class FileManagerHelper:
             logging.error(f"Error reading PDF file: {e}")
             raise HTTPException(status_code=400, detail="Unable to process PDF file")
 
-    """ Helper function to read the content of DOCX files """
-
     def read_docx(file: BytesIO):
+        """Handling content of DOCX files"""
         try:
             doc = Document(file)
             text = ""

@@ -4,9 +4,8 @@ import logging
 from fastapi import APIRouter, HTTPException, UploadFile, File
 from fastapi.responses import StreamingResponse
 from openai import OpenAIError
-from app.config import client
 from app.models.promt_model import Promt
-from app.utils.promp_validations import validate_input
+from app.utils.promp_manager import validate_input, create_rompt_model
 from app.locales.localization import Localization, tr
 from io import BytesIO
 from reportlab.pdfgen import canvas
@@ -23,14 +22,7 @@ async def get_resume(user_input: Promt):
     try:
         Localization.set_language("en")
         validate_input(user_input.prompt)
-
-        completion = client.chat.completions.create(
-            model="gpt-4o-mini",
-            messages=[
-                {"role": "system", "content": tr("SYSTEM_PROMPT_RESUME")},
-                {"role": "user", "content": user_input.prompt},
-            ],
-        )
+        completion = create_rompt_model(tr("SYSTEM_PROMPT_RESUME"), user_input.prompt)
         return {"message": "Success", "response": completion.choices[0].message.content}
     except ValueError as ve:
         logging.getLogger().error("Invalid data error: %s", ve)
@@ -59,47 +51,21 @@ async def get_file_resume(file: UploadFile = File(...)):
         # Read the file content
         content = await file.read()
         file_extension = file.filename.split(".")[-1].lower()
-        text_content = ""
 
-        # Process based on file type
-        if file_extension == "pdf":
-            text_content = FileManagerHelper.read_pdf(BytesIO(content))
-        elif file_extension == "txt":
-            text_content = content.decode("utf-8")
-        elif file_extension == "docx":
-            text_content = FileManagerHelper.read_docx(BytesIO(content))
-        else:
-            raise HTTPException(
-                status_code=400,
-                detail="Unsupported file type. Only PDF, TXT, and DOCX are allowed.",
-            )
+        text_content = FileManagerHelper.manage_file(file_extension, BytesIO(content))
 
         MAX_TOKENS = 4096  # Adjust based on model token limits
         if len(text_content) > MAX_TOKENS:
             text_content = text_content[:MAX_TOKENS]
 
         # Call GPT for summary
-        completion = client.chat.completions.create(
-            model="gpt-4o-mini",
-            messages=[
-                {"role": "system", "content": tr("SYSTEM_PROMPT_RESUME")},
-                {"role": "user", "content": text_content},
-            ],
-        )
-
+        completion = create_rompt_model(tr("SYSTEM_PROMPT_RESUME"), text_content)
         summary_text = completion.choices[0].message.content
 
-        title_completion = client.chat.completions.create(
-            model="gpt-4o-mini",
-            messages=[
-                {
-                    "role": "system",
-                    "content": "Now define a short title based on the summary topic, no more than 2 to 4 words",
-                },
-                {"role": "user", "content": summary_text},
-            ],
+        title_completion = create_rompt_model(
+            "Define a short title based on the summary topic, no more than 2 to 4 words",
+            summary_text,
         )
-
         summary_title = title_completion.choices[0].message.content
 
         # Generate PDF with the summary

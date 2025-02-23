@@ -2,7 +2,7 @@
 
 from fastapi import FastAPI
 from starlette.middleware.cors import CORSMiddleware
-from app.routers import resumes
+from app.routers import resumes, questionaries
 from .locales.localization import Localization, tr
 from .config import client  # pylint: disable=unused-import
 
@@ -21,6 +21,7 @@ app.add_middleware(
 )
 
 app.include_router(resumes.router, prefix="/api")
+app.include_router(questionaries.router, prefix="/api")
 
 
 @app.get("/")
