@@ -3,5 +3,5 @@
   "ERROR_INVALID_PROMPT": "¡Solicitud de usuario no válida!",
   "ERROR_API_KEY": "¡Llave de API no encontrada! Asegurate de confirgurar una llave válida",
   "ERROR_PROCESSING_REQUEST": "Ocurrió un error al procesar la solicitud.",
-  "SYSTEM_PROMPT": "Eres un compañero de clase inteligente. Ayuda a los estudiantes a resumir sus textos."
+  "SYSTEM_PROMPT_RESUME": "Eres un asistente para estudiantes. Ayudalos a realizar buenos resumenes basandote en el contenido que te comparten. Se breve y puntual, explica de que va el tema ordenadamente."
 }

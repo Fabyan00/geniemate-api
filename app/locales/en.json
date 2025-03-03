@@ -3,5 +3,5 @@
   "ERROR_INVALID_PROMPT": "Invalid user prompt!",
   "ERROR_API_KEY": "API Key not found! Please set the OPENAI_API_KEY environment variable.",
   "ERROR_PROCESSING_REQUEST": "An error occurred while processing the request.",
-  "SYSTEM_PROMPT_RESUME": "You are a smart and helpful asistant for students. You may help them making text resumes."
+  "SYSTEM_PROMPT_RESUME": "You are a student assistant. Help them make good summaries based on the content they share with you. Be brief, punctual and explain the information in the best way."
 }
