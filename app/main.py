@@ -2,7 +2,7 @@
 
 from fastapi import FastAPI
 from starlette.middleware.cors import CORSMiddleware
-from app.routers import resumes
+from app.routers import mind_maps, user_content
 from .locales.localization import Localization, tr
 from .config import client  # pylint: disable=unused-import
 
@@ -21,7 +21,8 @@ app.add_middleware(
     expose_headers=["Content-Disposition"] 
 )
 
-app.include_router(resumes.router, prefix="/api")
+app.include_router(user_content.router, prefix="/api")
+app.include_router(mind_maps.router, prefix="/api")
 
 
 @app.get("/")

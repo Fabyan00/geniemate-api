@@ -1,0 +1,47 @@
+digraph {
+	root [label="Sure! Here’s a textual representation of a mind map based on the \"Importance of doing exercise\":
+
+### Mind Map: Importance of Doing Exercise
+
+1. **Physical Health**
+   - Improves cardiovascular health
+   - Strengthens muscles and bones
+   - Aids in weight management
+   - Enhances immune system
+
+2. **Mental Health**
+   - Reduces stress and anxiety
+   - Improves mood and well-being
+   - Boosts self-esteem and confidence
+   - Enhances cognitive function
+
+3. **Social Benefits**
+   - Opportunities for social interaction
+   - Builds teamwork skills
+   - Creates a sense of community
+   - Encourages a supportive environment
+
+4. **Long-Term Benefits**
+   - Decreases risk of chronic diseases
+   - Increases longevity
+   - Promotes healthy aging
+   - Encourages healthy habits
+
+5. **Types of Exercise**
+   - Aerobic (running, swimming)
+   - Strength training (weightlifting)
+   - Flexibility (yoga, stretching)
+   - Balance exercises (Tai Chi)
+
+6. **Motivation and Goals**
+   - Setting achievable fitness goals
+   - Tracking progress
+   - Finding a workout buddy
+   - Seeking professional guidance (trainer, classes)
+
+This layout can help visualize the main concepts and sub-concepts related to the importance of exercise. You can create a graphical mind map using this structure with any mind mapping tool or on paper!"]
+	B [label="Idea 1"]
+	C [label="Idea 2"]
+	root -> B
+	root -> C
+}
