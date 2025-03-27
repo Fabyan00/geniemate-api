@@ -89,7 +89,7 @@ class FileManagerHelper:
         return {
             "filename": f"{summary_title}_summary.pdf",
             "preview": summary_text[:100] if len(summary_text) > 100 else summary_text,
-            "download_url": f"/download/{summary_title}_summary.pdf",
+            "download_url": f"/downloads/{summary_title}_summary.pdf",
         }
 
     def read_pdf(file: BytesIO):
